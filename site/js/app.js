@@ -185,15 +185,42 @@
     if (node) { node.classList.add("selected"); selectedNode = node; }
   }
 
-  function animateNumber(el, target) {
-    if (target == null) { el.textContent = "—"; return; }
-    const start = performance.now(), dur = 650;
+  // glass fill animation, with the % counting up in sync + a settling ripple
+  const gWater = document.getElementById("p-water");
+  const gSurface = document.getElementById("p-surface");
+  const gNum = document.getElementById("p-num");
+  const G = { yTop: 54, yBot: 326, span: 272, halfBot: 54, halfTop: 70 };
+
+  function fillGlass(target) {
+    if (target == null) {
+      gWater.setAttribute("y", 330); gWater.setAttribute("height", 20);
+      gSurface.setAttribute("cy", 330); gSurface.setAttribute("ry", 7);
+      gNum.textContent = "—";
+      return;
+    }
+    const f = target / 100, dur = 1000, start = performance.now();
     (function tick(now) {
-      const t = Math.min(1, (now - start) / dur);
-      const e = 1 - Math.pow(1 - t, 3);
-      el.textContent = (target * e).toFixed(1);
+      const t = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - t, 3), cur = f * e;
+      const level = G.yBot - cur * G.span;
+      gWater.setAttribute("y", level);
+      gWater.setAttribute("height", G.yBot - level + 26);
+      const half = G.halfBot + cur * (G.halfTop - G.halfBot);
+      gSurface.setAttribute("cy", level);
+      gSurface.setAttribute("rx", Math.max(8, half - 2));
+      gSurface.setAttribute("ry", 7 - cur * 1.5);
+      gNum.textContent = (target * e).toFixed(1);
       if (t < 1) requestAnimationFrame(tick);
-      else el.textContent = String(target);
+      else { gNum.textContent = String(target); rippleSurface(level); }
+    })(performance.now());
+  }
+
+  function rippleSurface(level) {
+    const start = performance.now(), dur = 700;
+    (function r(now) {
+      const t = (now - start) / dur;
+      if (t >= 1) { gSurface.setAttribute("ry", 5.5); return; }
+      gSurface.setAttribute("ry", 5.5 + 4 * (1 - t) * Math.sin(t * 18));
+      requestAnimationFrame(r);
     })(performance.now());
   }
 
@@ -211,7 +238,7 @@
     document.getElementById("p-sub").textContent =
       safe != null ? "Share of population with safely managed water" : "No “safely managed” figure reported — showing basic access";
 
-    animateNumber(document.getElementById("p-num"), shown);
+    fillGlass(shown);
     document.getElementById("p-pct").textContent = "%";
 
     document.getElementById("p-basic").textContent = c.basic_pct != null ? c.basic_pct + "%" : "—";

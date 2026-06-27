@@ -142,9 +142,28 @@
     </div>
 
     <div class="px-7 pb-12 flex flex-col gap-9">
-      <section>
-        <div class="text-display-lg text-[#0E1B2A] tracking-tight"><span id="p-num">—</span><span id="p-pct"></span></div>
-        <div class="text-label-sm uppercase text-[#5A6B7B] tracking-widest mt-1" id="p-biglabel">safely managed drinking water</div>
+      <section class="flex items-center gap-4">
+        <svg id="p-glass" width="116" height="170" viewBox="0 0 260 380" aria-hidden="true" class="shrink-0">
+          <defs>
+            <linearGradient id="p-water-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7fc4ec" />
+              <stop offset="55%" stop-color="#1683bd" />
+              <stop offset="100%" stop-color="#0a587f" />
+            </linearGradient>
+            <clipPath id="p-inside"><path d="M60,54 L200,54 L184,326 Q130,344 76,326 Z" /></clipPath>
+          </defs>
+          <path d="M55,50 L205,50 L188,330 Q130,352 72,330 Z" fill="#f3f9fe" />
+          <g clip-path="url(#p-inside)">
+            <rect id="p-water" x="48" y="330" width="164" height="20" fill="url(#p-water-grad)" />
+            <ellipse id="p-surface" cx="130" cy="330" rx="56" ry="7" fill="#a9d8f2" />
+          </g>
+          <ellipse cx="130" cy="50" rx="75" ry="12" fill="none" stroke="#0E1B2A" stroke-width="3" />
+          <path d="M55,50 L205,50 L188,330 Q130,352 72,330 Z" fill="none" stroke="#0E1B2A" stroke-width="3" />
+        </svg>
+        <div>
+          <div class="text-[46px] leading-none font-bold text-[#0E1B2A] tracking-tight"><span id="p-num">—</span><span id="p-pct"></span></div>
+          <div class="text-label-sm uppercase text-[#5A6B7B] tracking-widest mt-2" id="p-biglabel">safely managed drinking water</div>
+        </div>
       </section>
 
       <section class="grid grid-cols-2 gap-4">

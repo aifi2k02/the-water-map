@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | The Water Map</title>
+  <meta name="description" content="About The Water Map: what safely managed drinking water means, how to read the map, and where the data comes from." />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          "primary": "#005582", "primary-container": "#0c6ea5",
+          "on-surface": "#0f1c2b", "on-surface-variant": "#40484f",
+          "on-background": "#0E1B2A", "background": "#FBFCFD", "surface": "#FBFCFD",
+          "surface-container-low": "#eff4ff", "surface-container": "#e5eeff",
+          "outline": "#707880", "outline-variant": "#c0c7d1", "scarcity": "#C98A2B",
+        },
+        borderRadius: { "lg": "12px", "xl": "14px", "full": "9999px" },
+        spacing: { "margin-desktop": "64px", "max-width": "1280px" },
+        fontFamily: { "sans": ["Inter", "sans-serif"] },
+        fontSize: {
+          "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+          "body-md": ["16px", { lineHeight: "28px" }],
+          "body-lg": ["18px", { lineHeight: "32px" }],
+          "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+          "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.03em", fontWeight: "700" }],
+        },
+      } },
+    };
+  </script>
+</head>
+<body class="font-sans bg-surface text-on-background antialiased">
+  <header class="sticky top-0 z-50 bg-surface/90 backdrop-blur border-b border-outline-variant/30">
+    <div class="max-w-max-width mx-auto px-5 md:px-margin-desktop py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3 no-underline">
+        <span class="material-symbols-outlined text-primary-container text-[28px]" style="font-variation-settings:'FILL' 1;" aria-hidden="true">water_full</span>
+        <span class="text-headline-md font-bold tracking-tighter text-on-surface">The Water Map</span>
+      </a>
+      <nav class="flex items-center gap-6 md:gap-8">
+        <a href="index.html" class="text-on-surface-variant hover:text-primary transition-colors text-body-md">Map</a>
+        <a href="about.html" class="text-primary font-bold border-b-2 border-primary py-1 text-body-md">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-[760px] mx-auto px-5 md:px-margin-desktop py-14 md:py-20">
+    <h1 class="text-headline-lg mb-6">About</h1>
+    <p class="text-body-lg text-on-surface-variant mb-12">
+      Roughly a quarter of the world still lacks safely managed drinking water — water that is at home,
+      available when needed, and free from contamination. The Water Map lets you explore where that gap
+      is, country by country, and how it has shifted since the year 2000.
+    </p>
+
+    <h2 class="text-headline-md mb-5">Defining water access</h2>
+    <div class="grid md:grid-cols-2 gap-4 mb-12">
+      <div class="border border-outline-variant rounded-xl p-5 bg-white">
+        <div class="text-label-sm uppercase text-primary mb-2">Safely managed</div>
+        <p class="text-body-md text-on-surface-variant">The highest standard: an improved water source on premises, available when needed, and free of contamination. This is the headline figure on the map.</p>
+      </div>
+      <div class="border border-outline-variant rounded-xl p-5 bg-white">
+        <div class="text-label-sm uppercase text-scarcity mb-2">At least basic</div>
+        <p class="text-body-md text-on-surface-variant">A lower bar: an improved source within a 30-minute round trip. Where a country has no “safely managed” figure, we show this instead.</p>
+      </div>
+    </div>
+
+    <h2 class="text-headline-md mb-5">How to read it</h2>
+    <p class="text-body-md text-on-surface-variant mb-4">
+      On the map, countries are shaded from pale (low access) to deep navy (high access); grey means no
+      data. Click any country, or search by name, to open a panel with the headline figure, how many
+      people that leaves without safe water, and a chart of the trend since 2000. You can overlay a
+      second country to compare.
+    </p>
+    <p class="text-body-md text-on-surface-variant mb-12">
+      The “global average” and “without safe water” figures shown on the map are computed directly from
+      this dataset (population-weighted), not pulled from a headline elsewhere.
+    </p>
+
+    <h2 id="sources" class="text-headline-md mb-5">Data & methodology</h2>
+    <div class="flex flex-col gap-3 mb-10">
+      <a href="https://washdata.org/" target="_blank" rel="noopener" class="flex items-start gap-4 border border-outline-variant rounded-xl p-5 bg-white hover:border-primary transition-colors no-underline">
+        <span class="material-symbols-outlined text-primary-container" aria-hidden="true">water_drop</span>
+        <span><span class="block text-on-surface font-bold">WHO/UNICEF Joint Monitoring Programme (JMP)</span><span class="block text-body-md text-on-surface-variant">Source of the safely managed and at least basic drinking-water figures. Values to 2024.</span></span>
+      </a>
+      <a href="https://data.worldbank.org/" target="_blank" rel="noopener" class="flex items-start gap-4 border border-outline-variant rounded-xl p-5 bg-white hover:border-primary transition-colors no-underline">
+        <span class="material-symbols-outlined text-primary-container" aria-hidden="true">groups</span>
+        <span><span class="block text-on-surface font-bold">World Bank</span><span class="block text-body-md text-on-surface-variant">Population figures, used to estimate how many people the percentages represent.</span></span>
+      </a>
+      <a href="https://ourworldindata.org/water-access" target="_blank" rel="noopener" class="flex items-start gap-4 border border-outline-variant rounded-xl p-5 bg-white hover:border-primary transition-colors no-underline">
+        <span class="material-symbols-outlined text-primary-container" aria-hidden="true">public</span>
+        <span><span class="block text-on-surface font-bold">Our World in Data</span><span class="block text-body-md text-on-surface-variant">Standardised, machine-readable versions of the JMP and World Bank series.</span></span>
+      </a>
+    </div>
+    <p class="text-[13px] text-on-surface-variant italic">The Water Map is an independent project and is not affiliated with WHO, UNICEF, or the World Bank. Map shapes © Natural Earth.</p>
+  </main>
+
+  <footer class="border-t border-outline-variant/50 bg-white">
+    <div class="max-w-max-width mx-auto px-5 md:px-margin-desktop py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <span class="text-[14px] text-on-surface-variant">© 2026 The Water Map · Open data, openly cited.</span>
+      <nav class="flex gap-6">
+        <a class="text-label-sm text-on-surface-variant hover:text-primary" href="index.html">Map</a>
+        <a class="text-label-sm text-on-surface-variant hover:text-primary" href="about.html#sources">Data sources</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

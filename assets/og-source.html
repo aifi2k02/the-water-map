@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    font-family: Inter, sans-serif; background: #FBFCFD; color: #0E1B2A;
+    display: flex; align-items: center; padding: 0 80px; gap: 56px; overflow: hidden;
+    border-bottom: 14px solid #0c6ea5;
+  }
+  .left { flex: 1; }
+  .kicker { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .kicker .dot { width: 22px; height: 28px; border: 3px solid #042C53; border-top: none; border-radius: 0 0 7px 7px; position: relative; overflow: hidden; }
+  .kicker .dot::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 60%; background: #0c6ea5; }
+  .kicker span { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  h1 { font-size: 76px; line-height: 1.04; letter-spacing: -0.03em; font-weight: 800; margin-bottom: 26px; }
+  p { font-size: 30px; line-height: 1.4; color: #40484f; max-width: 640px; }
+  .src { margin-top: 40px; font-size: 20px; font-weight: 600; color: #707880; letter-spacing: 0.02em; }
+  .glass { width: 230px; height: 340px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="kicker"><span class="dot"></span><span>The Water Map</span></div>
+    <h1>Who has safe<br/>drinking water?</h1>
+    <p>An interactive map of safe drinking water access, country by country.</p>
+    <div class="src">WHO/UNICEF JMP · World Bank · to 2024</div>
+  </div>
+  <svg class="glass" viewBox="0 0 260 380" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="w" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7fc4ec"/><stop offset="55%" stop-color="#1683bd"/><stop offset="100%" stop-color="#0a587f"/>
+      </linearGradient>
+      <clipPath id="in"><path d="M60,54 L200,54 L184,326 Q130,344 76,326 Z"/></clipPath>
+    </defs>
+    <path d="M55,50 L205,50 L188,330 Q130,352 72,330 Z" fill="#f3f9fe"/>
+    <g clip-path="url(#in)">
+      <rect x="48" y="142" width="164" height="220" fill="url(#w)"/>
+      <ellipse cx="130" cy="142" rx="66" ry="7" fill="#a9d8f2"/>
+    </g>
+    <ellipse cx="130" cy="50" rx="75" ry="12" fill="none" stroke="#0E1B2A" stroke-width="3"/>
+    <path d="M55,50 L205,50 L188,330 Q130,352 72,330 Z" fill="none" stroke="#0E1B2A" stroke-width="3"/>
+  </svg>
+</body>
+</html>

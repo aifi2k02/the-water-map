@@ -1,0 +1,9 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Water Map">
+  <rect width="512" height="512" rx="112" fill="#042C53"/>
+  <defs>
+    <clipPath id="g"><path d="M168,124 L344,124 L320,388 Q256,414 192,388 Z"/></clipPath>
+  </defs>
+  <path d="M168,124 L344,124 L320,388 Q256,414 192,388 Z" fill="#ffffff"/>
+  <g clip-path="url(#g)"><rect x="150" y="248" width="212" height="180" fill="#1683bd"/></g>
+  <ellipse cx="256" cy="248" rx="84" ry="10" fill="#7fc4ec"/>
+</svg>

@@ -1,0 +1,6 @@
+# Cloudflare Pages headers.
+# PRE-LAUNCH: keep the whole site out of search engines.
+# To allow indexing at launch, delete this X-Robots-Tag block (and flip the
+# <meta name="robots"> tags in index.html / about.html to "index, follow").
+/*
+  X-Robots-Tag: noindex, nofollow

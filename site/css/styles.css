@@ -34,3 +34,20 @@
 
 /* ---- trend chart ---- */
 #trend { width: 100%; height: auto; display: block; }
+
+/* ---- search autocomplete (works on iOS, unlike <datalist>) ---- */
+.search-results {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;
+  margin: 0; padding: 4px; list-style: none; background: #fff;
+  border: 1px solid #c0c7d1; border-radius: 12px; box-shadow: 0 10px 30px rgba(14,27,42,.12);
+  max-height: 280px; overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+.search-results[hidden] { display: none; }
+.search-results li {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 11px 12px; border-radius: 8px; cursor: pointer; font-size: 15px; color: #0E1B2A;
+}
+.search-results li .val { color: #5A6B7B; font-size: 13px; flex-shrink: 0; }
+.search-results li.active, .search-results li:hover { background: #eff4ff; }
+.search-results li.empty { color: #5A6B7B; cursor: default; justify-content: flex-start; }
+.search-results li.empty:hover { background: transparent; }

@@ -58,11 +58,15 @@
       <p class="text-body-lg text-on-surface-variant mb-8">Click any country to see how much of its population uses safely managed drinking water — and how that's changed since 2000.</p>
       <div class="flex flex-col md:flex-row md:items-center gap-4">
         <div class="relative flex-grow max-w-md">
-          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" aria-hidden="true">search</span>
-          <input id="search" type="text" list="country-list" autocomplete="off" placeholder="Search a country…" aria-label="Search for a country"
-            class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" />
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline z-10" aria-hidden="true">search</span>
+          <input id="search" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+            role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Search a country…" aria-label="Search for a country"
+            class="w-full pl-12 pr-10 py-3 text-[16px] bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" />
+          <button id="search-clear" type="button" aria-label="Clear search" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+          <ul id="search-results" role="listbox" class="search-results" hidden></ul>
         </div>
-        <datalist id="country-list"></datalist>
         <span class="text-label-sm text-on-surface-variant/60 uppercase tracking-widest hidden md:block">or click the map</span>
       </div>
     </section>

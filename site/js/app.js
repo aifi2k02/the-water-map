@@ -90,19 +90,89 @@
   document.getElementById("zoom-in").addEventListener("click", () => svg.transition().duration(250).call(zoom.scaleBy, 1.5));
   document.getElementById("zoom-out").addEventListener("click", () => svg.transition().duration(250).call(zoom.scaleBy, 0.66));
 
-  // ---------- search + compare lists ----------
+  // ---------- compare list ----------
   const all = Object.values(dataByA3).sort((a, b) => a.country.localeCompare(b.country));
-  const dl = document.getElementById("country-list");
   const cmp = document.getElementById("compare");
-  all.forEach((c) => {
-    dl.appendChild(Object.assign(document.createElement("option"), { value: c.country }));
-    cmp.appendChild(Object.assign(document.createElement("option"), { value: c.code, textContent: c.country }));
-  });
+  all.forEach((c) => cmp.appendChild(Object.assign(document.createElement("option"), { value: c.code, textContent: c.country })));
+
+  // ---------- search autocomplete (custom; reliable on iOS) ----------
   const search = document.getElementById("search");
-  search.addEventListener("change", () => {
-    const hit = all.find((c) => c.country.toLowerCase() === search.value.trim().toLowerCase());
-    if (hit) openPanel(hit.code);
+  const results = document.getElementById("search-results");
+  const clearBtn = document.getElementById("search-clear");
+  let activeIdx = -1;
+
+  const labelFor = (c) => (c.safe_pct != null ? c.safe_pct + "%" : c.basic_pct != null ? c.basic_pct + "% basic" : "no data");
+
+  function renderResults(q) {
+    const query = q.trim().toLowerCase();
+    clearBtn.classList.toggle("hidden", q.length === 0);
+    if (!query) { hideResults(); return; }
+    const starts = [], contains = [];
+    for (const c of all) {
+      const n = c.country.toLowerCase();
+      if (n.startsWith(query)) starts.push(c);
+      else if (n.includes(query)) contains.push(c);
+    }
+    const matches = starts.concat(contains).slice(0, 8);
+    results.innerHTML = "";
+    activeIdx = -1;
+    if (!matches.length) {
+      const li = document.createElement("li");
+      li.className = "empty";
+      li.textContent = "No country found";
+      results.appendChild(li);
+    } else {
+      matches.forEach((c, i) => {
+        const li = document.createElement("li");
+        li.setAttribute("role", "option");
+        li.dataset.code = c.code;
+        li.innerHTML = `<span>${c.country}</span><span class="val">${labelFor(c)}</span>`;
+        li.addEventListener("mousedown", (e) => { e.preventDefault(); choose(c.code); });
+        results.appendChild(li);
+      });
+    }
+    results.hidden = false;
+    search.setAttribute("aria-expanded", "true");
+  }
+
+  function hideResults() {
+    results.hidden = true;
+    results.innerHTML = "";
+    activeIdx = -1;
+    search.setAttribute("aria-expanded", "false");
+  }
+
+  function choose(code) {
+    search.value = "";
+    clearBtn.classList.add("hidden");
+    hideResults();
+    search.blur();
+    openPanel(code);
+  }
+
+  function moveActive(delta) {
+    const items = [...results.querySelectorAll('li[role="option"]')];
+    if (!items.length) return;
+    if (activeIdx >= 0) items[activeIdx].classList.remove("active");
+    activeIdx = (activeIdx + delta + items.length) % items.length;
+    items[activeIdx].classList.add("active");
+    items[activeIdx].scrollIntoView({ block: "nearest" });
+  }
+
+  search.addEventListener("input", () => renderResults(search.value));
+  search.addEventListener("focus", () => { if (search.value.trim()) renderResults(search.value); });
+  search.addEventListener("keydown", (e) => {
+    const items = [...results.querySelectorAll('li[role="option"]')];
+    if (e.key === "ArrowDown") { e.preventDefault(); moveActive(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); moveActive(-1); }
+    else if (e.key === "Enter") {
+      e.preventDefault();
+      const pick = activeIdx >= 0 ? items[activeIdx] : items[0];
+      if (pick) choose(pick.dataset.code);
+    } else if (e.key === "Escape") { hideResults(); }
   });
+  clearBtn.addEventListener("click", () => { search.value = ""; hideResults(); clearBtn.classList.add("hidden"); search.focus(); });
+  document.addEventListener("click", (e) => { if (!e.target.closest(".search-results") && e.target !== search) hideResults(); });
 
   // ---------- panel ----------
   const panel = document.getElementById("panel");

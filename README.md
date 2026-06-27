@@ -7,7 +7,7 @@ Click any country to see the share of its population with safely managed drinkin
 people that leaves without safe water, and how the figure has changed since 2000. You can search by
 name and compare two countries.
 
-**Live site:** _(added after first deploy)_
+**Live site:** https://the-water-map.aifi2k02.workers.dev/
 
 ## How it works
 
